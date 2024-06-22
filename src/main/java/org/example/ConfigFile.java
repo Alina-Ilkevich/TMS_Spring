@@ -6,12 +6,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ConfigFile {
     public static void main(String[] args) {
-        ApplicationContext context1 = new ClassPathXmlApplicationContext("config.xml");
-        ReadingNews bean = (ReadingNews) context1.getBean("read");
-        bean.getMessage();
-        ApplicationContext context = new AnnotationConfigApplicationContext(PetFeeding.class);
-        //PetFeeding cat = context.getBean("cat", PetFeeding.class);
-        //PetFeeding dog = context.getBean("dog", PetFeeding.class);
-
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        CatFeeding cat = context.getBean("feedCat", CatFeeding.class);
+        cat.feedCat();
+        DogFeeding dog = context.getBean("feedDog", DogFeeding.class);
+        dog.feedDog();
+        ReadingNews news = context.getBean("read", ReadingNews.class);
+        String message = context.getBean("message", String.class);
+        news.getMessage();
     }
 }
